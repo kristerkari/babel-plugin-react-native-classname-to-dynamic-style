@@ -1,4 +1,4 @@
-const generate = require("babel-generator").default;
+var generate = require("babel-generator").default;
 
 module.exports = function(babel) {
   var css = null;
@@ -35,9 +35,9 @@ module.exports = function(babel) {
   }
 
   function generateRequire(expression) {
-    const object = expression.object;
-    const property = expression.property;
-    const prop =
+    var object = expression.object;
+    var property = expression.property;
+    var prop =
       t.isStringLiteral(property) || t.isBinaryExpression(property)
         ? `[${generate(property).code}]`
         : `.${property.name}`;
@@ -56,16 +56,15 @@ module.exports = function(babel) {
     }
 
     if (t.isCallExpression(expression)) {
-      const args = expression.arguments;
-      if (args.some(t.isMemberExpression)) {
-        expression.arguments = args.map(generateRequire);
+      if (expression.arguments.some(t.isMemberExpression)) {
+        expression.arguments = expression.arguments.map(generateRequire);
       }
     }
 
     if (t.isConditionalExpression(expression)) {
-      const test = expression.test;
-      const consequent = expression.consequent;
-      const alternate = expression.alternate;
+      var test = expression.test;
+      var consequent = expression.consequent;
+      var alternate = expression.alternate;
 
       if (t.isUnaryExpression(test)) {
         if (t.isMemberExpression(test.argument)) {
@@ -122,7 +121,7 @@ module.exports = function(babel) {
             css && style && css.parentPath.node !== style.parentPath.node;
 
           if (isArrayWithJoin(css.node.value)) {
-            const elements = css.node.value.expression.callee.object.elements;
+            var elements = css.node.value.expression.callee.object.elements;
             if (css && style) {
               style.node.value = t.arrayExpression(
                 [].concat(
@@ -184,7 +183,7 @@ module.exports = function(babel) {
           css = null;
           style = null;
         } else if (isTemplateLiteralWithExpressions(css.node.value)) {
-          const expressions = css.node.value.expression.expressions;
+          var expressions = css.node.value.expression.expressions;
           css.node.value.expression.expressions = expressions.map(
             generateRequire
           );
