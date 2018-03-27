@@ -1,5 +1,3 @@
-var generate = require("babel-generator").default;
-
 module.exports = function(babel) {
   var css = null;
   var style = null;
@@ -35,19 +33,15 @@ module.exports = function(babel) {
   }
 
   function generateRequire(expression) {
-    var object = expression.object;
-    var property = expression.property;
-    var prop =
-      t.isStringLiteral(property) || t.isBinaryExpression(property)
-        ? `[${generate(property).code}]`
-        : `.${property.name}`;
+    var require = t.callExpression(t.identifier("require"), [
+      t.stringLiteral("react-native-css-media-query-processor")
+    ]);
 
-    return t.memberExpression(
-      t.callExpression(t.identifier("require"), [
-        t.stringLiteral("react-native-css-media-query-processor")
-      ]),
-      t.identifier(`process(${object.name})${prop}`)
+    expression.object = t.callExpression(
+      t.memberExpression(require, t.identifier("process")),
+      [expression.object]
     );
+    return expression;
   }
 
   function transformExpressions(expression) {
