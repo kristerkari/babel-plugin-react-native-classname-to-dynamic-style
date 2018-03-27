@@ -80,7 +80,6 @@
     ]
   },
   "dependencies": {
-    "babel-generator": "^6.26.1",
     "react-native-css-media-query-processor": "^0.13.1"
   }
 }
