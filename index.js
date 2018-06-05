@@ -34,7 +34,7 @@ module.exports = function(babel) {
 
   function generateRequire(expression) {
     var require = t.callExpression(t.identifier("require"), [
-      t.stringLiteral("react-native-css-media-query-processor")
+      t.stringLiteral("react-native-dynamic-style-processor")
     ]);
 
     expression.object = t.callExpression(

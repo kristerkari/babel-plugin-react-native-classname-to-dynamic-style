@@ -96,6 +96,6 @@
     }
   },
   "dependencies": {
-    "react-native-css-media-query-processor": "^0.14.0"
+    "react-native-dynamic-style-processor": "^0.10.0"
   }
 }
