@@ -74,12 +74,6 @@
     "singleQuote": false,
     "trailingComma": "none"
   },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react"
-    ]
-  },
   "jest": {
     "coverageDirectory": "./.coverage/",
     "coverageReporters": [
