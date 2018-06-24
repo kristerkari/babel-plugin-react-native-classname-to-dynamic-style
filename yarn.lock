@@ -1183,9 +1183,9 @@ cryptiles@3.x.x:
   dependencies:
     boom "5.x.x"
 
-css-viewport-units-transform@^0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/css-viewport-units-transform/-/css-viewport-units-transform-0.10.1.tgz#a043ee456893770404b1468ac44d7f0cea57d018"
+css-viewport-units-transform@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/css-viewport-units-transform/-/css-viewport-units-transform-0.10.2.tgz#8c528faee717636809608f7c3720b8c05070d32e"
 
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.2"
@@ -3726,20 +3726,20 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-native-css-media-query-processor@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/react-native-css-media-query-processor/-/react-native-css-media-query-processor-0.14.0.tgz#e99f13c721dbf92b522bd4f1116c0da4fb54f8fa"
+react-native-css-media-query-processor@^0.14.1:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/react-native-css-media-query-processor/-/react-native-css-media-query-processor-0.14.1.tgz#fd8d4b4031cf4e4f4d0b78283d9202b21228bd32"
   dependencies:
     deepmerge "^2.1.0"
     micro-memoize "^2.0.1"
 
-react-native-dynamic-style-processor@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/react-native-dynamic-style-processor/-/react-native-dynamic-style-processor-0.10.0.tgz#2e507d9e2b57a54c6c509de3af7d7c2da6397a6c"
+react-native-dynamic-style-processor@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/react-native-dynamic-style-processor/-/react-native-dynamic-style-processor-0.10.3.tgz#d81f0a977dc455363eec193858421d38ff895621"
   dependencies:
-    css-viewport-units-transform "^0.10.1"
+    css-viewport-units-transform "^0.10.2"
     micro-memoize "^2.0.3"
-    react-native-css-media-query-processor "^0.14.0"
+    react-native-css-media-query-processor "^0.14.1"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
