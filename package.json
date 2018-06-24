@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-react-native-classname-to-dynamic-style",
-  "version": "0.20.0",
+  "version": "0.20.1",
   "description": "Transform JSX className property to dynamic style property in React Native. The plugin is used to match style objects containing parsed CSS media queries with React Native.",
   "keywords": [
     "babel",
