@@ -90,6 +90,6 @@
     }
   },
   "dependencies": {
-    "react-native-dynamic-style-processor": "^0.10.3"
+    "react-native-dynamic-style-processor": "^0.20.0"
   }
 }
