@@ -100,6 +100,7 @@ module.exports = function(babel) {
   }
 
   return {
+    name: "react-native-classname-to-dynamic-style",
     visitor: {
       JSXOpeningElement: {
         exit(path, state) {

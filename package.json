@@ -25,6 +25,7 @@
     "README.md"
   ],
   "devDependencies": {
+    "@babel/eslint-plugin-development": "^1.0.1",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.0.1",
     "babel-plugin-tester": "^5.4.0",
@@ -52,6 +53,9 @@
   },
   "eslintConfig": {
     "extends": "standard",
+    "plugins": [
+      "@babel/development"
+    ],
     "env": {
       "jest": true
     },
@@ -66,7 +70,10 @@
       ],
       "quotes": 0,
       "no-unused-vars": 2,
-      "indent": 0
+      "indent": 0,
+      "@babel/development/no-deprecated-clone": 2,
+      "@babel/development/no-undefined-identifier": 2,
+      "@babel/development/plugin-name": 2
     }
   },
   "prettier": {
