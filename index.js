@@ -133,7 +133,7 @@ module.exports = function(babel) {
                 elements.map(generateRequire)
               );
             }
-          } else if (isSameElement || style == null) {
+          } else if (isSameElement || style === null) {
             css.node.value.expression = transformExpressions(
               css.node.value.expression
             );

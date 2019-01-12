@@ -68,6 +68,10 @@
         2,
         "always"
       ],
+      "eqeqeq": [
+        2,
+        "always"
+      ],
       "quotes": 0,
       "no-unused-vars": 2,
       "indent": 0,
