@@ -149,6 +149,7 @@ module.exports = function(babel) {
             ]);
             css.remove();
           }
+          templateLiteral = null;
           css = null;
           style = null;
         }
