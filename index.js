@@ -4,6 +4,17 @@ module.exports = function(babel) {
   var t = babel.types;
   var templateLiteral = null;
 
+  function isRequire(node) {
+    return (
+      node &&
+      node.declarations &&
+      node.declarations[0] &&
+      node.declarations[0].init &&
+      node.declarations[0].init.callee &&
+      node.declarations[0].init.callee.name === "require"
+    );
+  }
+
   function isJoinExpression(value) {
     return (
       value.expression.callee &&
@@ -32,24 +43,18 @@ module.exports = function(babel) {
     return t.isJSXExpressionContainer(value) && isJoinExpression(value);
   }
 
-  function generateRequire() {
+  function generateRequire(name) {
     var require = t.callExpression(t.identifier("require"), [
       t.stringLiteral("react-native-dynamic-style-processor")
     ]);
-    var d = t.variableDeclarator(
-      t.identifier("reactNativeDynamicStyleProcessor"),
-      require
-    );
+    var d = t.variableDeclarator(name, require);
     return t.variableDeclaration("var", [d]);
   }
 
   function generateProcessCall(expression, state) {
     state.hasTransformedClassName = true;
     expression.object = t.callExpression(
-      t.memberExpression(
-        t.identifier("reactNativeDynamicStyleProcessor"),
-        t.identifier("process")
-      ),
+      t.memberExpression(state.reqName, t.identifier("process")),
       [expression.object]
     );
     return expression;
@@ -116,20 +121,25 @@ module.exports = function(babel) {
     name: "react-native-classname-to-dynamic-style",
     visitor: {
       Program: {
+        enter(path, state) {
+          state.reqName = path.scope.generateUidIdentifier(
+            "react-native-dynamic-style-processor"
+          );
+        },
         exit(path, state) {
           if (!state.hasTransformedClassName) {
             return;
           }
 
-          const lastImport = path
+          const lastImportOrRequire = path
             .get("body")
-            .filter(p => p.isImportDeclaration())
+            .filter(p => p.isImportDeclaration() || isRequire(p.node))
             .pop();
 
-          if (lastImport) {
-            lastImport.insertAfter(generateRequire());
+          if (lastImportOrRequire) {
+            lastImportOrRequire.insertAfter(generateRequire(state.reqName));
           } else {
-            path.unshiftContainer("body", generateRequire());
+            path.unshiftContainer("body", generateRequire(state.reqName));
           }
         }
       },

@@ -8,13 +8,38 @@ const Foo = () => <div className={styles.foo} style={myFn()}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).foo, myFn()] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, myFn()] },
     \\"Foo\\"
+  );
+};
+"
+`;
+
+exports[`babel-plugin-react-native-classname-to-dynamic-style Should not clash with already existing require call with the same name: Should not clash with already existing require call with the same name 1`] = `
+"
+var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+const Foo = () => <div className={styles.foo}>Foo</div>
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+'use strict';
+
+var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+
+var _reactNativeDynamicStyleProcessor2 = require('react-native-dynamic-style-processor');
+
+var Foo = function Foo() {
+  return React.createElement(
+    'div',
+    { style: _reactNativeDynamicStyleProcessor2.process(styles).foo },
+    'Foo'
   );
 };
 "
@@ -273,12 +298,12 @@ var _styles2 = _interopRequireDefault(_styles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo(color) {
   return React.createElement(
     \\"div\\",
-    { style: reactNativeDynamicStyleProcessor.process(_styles2.default)[\\"foo-bar\\"] },
+    { style: _reactNativeDynamicStyleProcessor.process(_styles2.default)[\\"foo-bar\\"] },
     \\"Foo\\"
   );
 };
@@ -300,12 +325,12 @@ var _styles2 = _interopRequireDefault(_styles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: isTrue ? reactNativeDynamicStyleProcessor.process(_styles2.default).foo : reactNativeDynamicStyleProcessor.process(_styles2.default).bar },
+    { style: isTrue ? _reactNativeDynamicStyleProcessor.process(_styles2.default).foo : _reactNativeDynamicStyleProcessor.process(_styles2.default).bar },
     \\"Foo\\"
   );
 };
@@ -327,12 +352,12 @@ var _styles2 = _interopRequireDefault(_styles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: reactNativeDynamicStyleProcessor.process(_styles2.default).foo },
+    { style: _reactNativeDynamicStyleProcessor.process(_styles2.default).foo },
     \\"Foo\\"
   );
 };
@@ -348,13 +373,14 @@ const Foo = () => <div className={styles.foo}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
-
 var styles = require(\\"./styles.css\\");
+
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: reactNativeDynamicStyleProcessor.process(styles).foo },
+    { style: _reactNativeDynamicStyleProcessor.process(styles).foo },
     \\"Foo\\"
   );
 };
@@ -370,13 +396,14 @@ const Foo = (color) => <div className={styles[\\"foo-bar\\"]}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
-
 var styles = require(\\"./styles.css\\");
+
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+
 var Foo = function Foo(color) {
   return React.createElement(
     \\"div\\",
-    { style: reactNativeDynamicStyleProcessor.process(styles)[\\"foo-bar\\"] },
+    { style: _reactNativeDynamicStyleProcessor.process(styles)[\\"foo-bar\\"] },
     \\"Foo\\"
   );
 };
@@ -392,13 +419,14 @@ const Foo = () => <div className={isTrue ? styles.foo : styles.bar}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
-
 var styles = require(\\"./styles.css\\");
+
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: isTrue ? reactNativeDynamicStyleProcessor.process(styles).foo : reactNativeDynamicStyleProcessor.process(styles).bar },
+    { style: isTrue ? _reactNativeDynamicStyleProcessor.process(styles).foo : _reactNativeDynamicStyleProcessor.process(styles).bar },
     \\"Foo\\"
   );
 };
@@ -413,12 +441,12 @@ const Foo = () => <div className={\` ignored \${styles.transformed}\`}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).transformed] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).transformed] },
     \\"Foo\\"
   );
 };
@@ -433,12 +461,12 @@ const Foo = () => <div className={styles.shouldMergeWithStyles} style={{}} key={
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, {}], key: 1 },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, {}], key: 1 },
     \\"Foo\\"
   );
 };
@@ -453,12 +481,12 @@ const Foo = () => <div className={styles.shouldMergeWithStyles} style={{}}>Foo</
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, {}] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, {}] },
     \\"Foo\\"
   );
 };
@@ -473,7 +501,7 @@ const Foo = () => <div style={{ width: \\"100%\\" }}><div className={styles.shou
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
@@ -481,7 +509,7 @@ var Foo = function Foo() {
     { style: { width: \\"100%\\" } },
     React.createElement(
       \\"div\\",
-      { style: [reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, { color: \\"#f00\\" }] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, { color: \\"#f00\\" }] },
       \\"Foo\\"
     )
   );
@@ -497,12 +525,12 @@ const Foo = () => <div className={b(styles.shouldMergeWithStyles)} style={f(styl
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [b(reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles), f(styles.foo)] },
+    { style: [b(_reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles), f(styles.foo)] },
     \\"Foo\\"
   );
 };
@@ -517,7 +545,7 @@ const Foo = () => <div><div className={styles.shouldMergeWithStyles} style={{ co
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
@@ -525,12 +553,12 @@ var Foo = function Foo() {
     null,
     React.createElement(
       \\"div\\",
-      { style: [reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, { color: \\"#f00\\" }] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, { color: \\"#f00\\" }] },
       \\"Foo\\"
     ),
     React.createElement(
       \\"div\\",
-      { style: [reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, { color: \\"#0f0\\" }] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, { color: \\"#0f0\\" }] },
       \\"Bar\\"
     )
   );
@@ -546,12 +574,12 @@ const Foo = () => <div className={styles.shouldMergeWithStyles} style={{ color: 
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, { color: \\"#f00\\" }] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).shouldMergeWithStyles, { color: \\"#f00\\" }] },
     \\"Foo\\"
   );
 };
@@ -566,7 +594,7 @@ const Foo = () => <div style={{ width: \\"100%\\" }}><div className={styles.imWi
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
@@ -574,7 +602,7 @@ var Foo = function Foo() {
     { style: { width: \\"100%\\" } },
     React.createElement(
       \\"div\\",
-      { style: [reactNativeDynamicStyleProcessor.process(styles).imWithFoo, { color: \\"black\\" }] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).imWithFoo, { color: \\"black\\" }] },
       \\"Foo\\"
     )
   );
@@ -590,12 +618,12 @@ const Foo = () => <div className={[styles.style1, styles.style2, styles.style3].
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles).style1, reactNativeDynamicStyleProcessor.process(styles).style2, reactNativeDynamicStyleProcessor.process(styles).style3, {}] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, _reactNativeDynamicStyleProcessor.process(styles).style2, _reactNativeDynamicStyleProcessor.process(styles).style3, {}] },
     'Foo'
   );
 };
@@ -610,12 +638,12 @@ const Foo = () => <div className={[styles.style1, styles.style2, styles.style3].
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).style1, reactNativeDynamicStyleProcessor.process(styles).style2, reactNativeDynamicStyleProcessor.process(styles).style3, { color: \\"red\\" }] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, _reactNativeDynamicStyleProcessor.process(styles).style2, _reactNativeDynamicStyleProcessor.process(styles).style3, { color: \\"red\\" }] },
     \\"Foo\\"
   );
 };
@@ -630,7 +658,7 @@ const Foo = () => <div><div className={[styles.style1, styles.style2].join(' ')}
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
@@ -638,12 +666,12 @@ var Foo = function Foo() {
     null,
     React.createElement(
       'div',
-      { style: [reactNativeDynamicStyleProcessor.process(styles).style1, reactNativeDynamicStyleProcessor.process(styles).style2] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, _reactNativeDynamicStyleProcessor.process(styles).style2] },
       'Foo'
     ),
     React.createElement(
       'div',
-      { style: [reactNativeDynamicStyleProcessor.process(styles).style3, reactNativeDynamicStyleProcessor.process(styles).style4] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).style3, _reactNativeDynamicStyleProcessor.process(styles).style4] },
       'Bar'
     )
   );
@@ -659,12 +687,12 @@ const Foo = () => <div className={[styles.style1, styles.style2].join(' ')}>Foo<
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles).style1, reactNativeDynamicStyleProcessor.process(styles).style2] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, _reactNativeDynamicStyleProcessor.process(styles).style2] },
     'Foo'
   );
 };
@@ -679,12 +707,12 @@ const Foo = () => <div className={[styles.style1, styles.style2, styles.style3].
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles).style1, reactNativeDynamicStyleProcessor.process(styles).style2, reactNativeDynamicStyleProcessor.process(styles).style3] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, _reactNativeDynamicStyleProcessor.process(styles).style2, _reactNativeDynamicStyleProcessor.process(styles).style3] },
     'Foo'
   );
 };
@@ -699,12 +727,12 @@ const Foo = () => <div className={\`\${styles['foo']} \${styles['bar']}\`}>Foo</
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles)['foo'], reactNativeDynamicStyleProcessor.process(styles)['bar']] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles)['foo'], _reactNativeDynamicStyleProcessor.process(styles)['bar']] },
     'Foo'
   );
 };
@@ -719,7 +747,7 @@ const Foo = () => <div><div className={\`\${styles.foo} \${styles.bar} \${styles
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
@@ -727,12 +755,12 @@ var Foo = function Foo() {
     null,
     React.createElement(
       'div',
-      { style: [reactNativeDynamicStyleProcessor.process(styles).foo, reactNativeDynamicStyleProcessor.process(styles).bar, reactNativeDynamicStyleProcessor.process(styles).baz, { color: 'blue' }] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, _reactNativeDynamicStyleProcessor.process(styles).bar, _reactNativeDynamicStyleProcessor.process(styles).baz, { color: 'blue' }] },
       'Foo'
     ),
     React.createElement(
       'div',
-      { style: [reactNativeDynamicStyleProcessor.process(styles).style1, reactNativeDynamicStyleProcessor.process(styles).style2, reactNativeDynamicStyleProcessor.process(styles).style3, { color: 'red' }] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, _reactNativeDynamicStyleProcessor.process(styles).style2, _reactNativeDynamicStyleProcessor.process(styles).style3, { color: 'red' }] },
       'Bar'
     )
   );
@@ -748,7 +776,7 @@ const Foo = () => <div><div className={\`\${styles.foo} \${styles.bar} \${styles
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
@@ -756,12 +784,12 @@ var Foo = function Foo() {
     null,
     React.createElement(
       'div',
-      { style: [reactNativeDynamicStyleProcessor.process(styles).foo, reactNativeDynamicStyleProcessor.process(styles).bar, reactNativeDynamicStyleProcessor.process(styles).baz] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, _reactNativeDynamicStyleProcessor.process(styles).bar, _reactNativeDynamicStyleProcessor.process(styles).baz] },
       'Foo'
     ),
     React.createElement(
       'div',
-      { style: [reactNativeDynamicStyleProcessor.process(styles).style1, reactNativeDynamicStyleProcessor.process(styles).style2] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, _reactNativeDynamicStyleProcessor.process(styles).style2] },
       'Bar'
     )
   );
@@ -777,12 +805,12 @@ const Foo = () => <div className={\`\${styles.foo} \${styles.bar} \${styles.baz}
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).foo, reactNativeDynamicStyleProcessor.process(styles).bar, reactNativeDynamicStyleProcessor.process(styles).baz, {}] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, _reactNativeDynamicStyleProcessor.process(styles).bar, _reactNativeDynamicStyleProcessor.process(styles).baz, {}] },
     \\"Foo\\"
   );
 };
@@ -797,12 +825,12 @@ const Foo = () => <div className={\`\${styles.foo} \${styles.bar} \${styles.baz}
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles).foo, reactNativeDynamicStyleProcessor.process(styles).bar, reactNativeDynamicStyleProcessor.process(styles).baz, { color: 'black' }] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, _reactNativeDynamicStyleProcessor.process(styles).bar, _reactNativeDynamicStyleProcessor.process(styles).baz, { color: 'black' }] },
     'Foo'
   );
 };
@@ -817,12 +845,12 @@ const Foo = () => <div className={\`\${styles.foo} \${styles.bar}\`}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).foo, reactNativeDynamicStyleProcessor.process(styles).bar] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, _reactNativeDynamicStyleProcessor.process(styles).bar] },
     \\"Foo\\"
   );
 };
@@ -837,12 +865,12 @@ const Foo = () => <div className={\`\${styles.foo} \${styles.bar} \${styles.baz}
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).foo, reactNativeDynamicStyleProcessor.process(styles).bar, reactNativeDynamicStyleProcessor.process(styles).baz] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, _reactNativeDynamicStyleProcessor.process(styles).bar, _reactNativeDynamicStyleProcessor.process(styles).baz] },
     \\"Foo\\"
   );
 };
@@ -857,12 +885,12 @@ const Foo = () => <div className={[styles[\\"style1\\"]].join(' ')} style={{ col
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles)[\\"style1\\"], { color: \\"red\\" }] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles)[\\"style1\\"], { color: \\"red\\" }] },
     \\"Foo\\"
   );
 };
@@ -877,12 +905,12 @@ const Foo = () => <div className={\`\${styles['foo']}\`} style={{ color: 'black'
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles)['foo'], { color: 'black' }] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles)['foo'], { color: 'black' }] },
     'Foo'
   );
 };
@@ -897,12 +925,12 @@ const Foo = () => <div className={\`\${styles['foo']}\`}>Foo</div>
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles)['foo']] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles)['foo']] },
     'Foo'
   );
 };
@@ -917,12 +945,12 @@ const Foo = () => <div className={[styles.style1].join(' ')} style={{}}>Foo</div
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles).style1, {}] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, {}] },
     'Foo'
   );
 };
@@ -937,12 +965,12 @@ const Foo = () => <div className={[styles.style1].join(' ')} style={{ color: \\"
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).style1, { color: \\"red\\" }] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, { color: \\"red\\" }] },
     \\"Foo\\"
   );
 };
@@ -957,12 +985,12 @@ const Foo = () => <div className={[styles.style1].join(' ')}>Foo</div>
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles).style1, {}] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).style1, {}] },
     'Foo'
   );
 };
@@ -977,12 +1005,12 @@ const Foo = () => <div className={\`\${styles.foo}\`} style={{}}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).foo, {}] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, {}] },
     \\"Foo\\"
   );
 };
@@ -997,12 +1025,12 @@ const Foo = () => <div className={\`\${styles.foo}\`} style={{ color: 'black' }}
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [reactNativeDynamicStyleProcessor.process(styles).foo, { color: 'black' }] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, { color: 'black' }] },
     'Foo'
   );
 };
@@ -1017,12 +1045,12 @@ const Foo = () => <div className={\`\${styles.foo}\`}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).foo] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo] },
     \\"Foo\\"
   );
 };
@@ -1037,12 +1065,12 @@ const Foo = (color) => <div className={styles[\\"button\\" + titleCase(color)]}>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo(color) {
   return React.createElement(
     \\"div\\",
-    { style: reactNativeDynamicStyleProcessor.process(styles)[\\"button\\" + titleCase(color)] },
+    { style: _reactNativeDynamicStyleProcessor.process(styles)[\\"button\\" + titleCase(color)] },
     \\"Foo\\"
   );
 };
@@ -1057,12 +1085,12 @@ const Foo = (color) => <div className={styles[\\"foo-bar\\"]} style={{ color: \\
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo(color) {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles)[\\"foo-bar\\"], { color: \\"#f00\\" }] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles)[\\"foo-bar\\"], { color: \\"#f00\\" }] },
     \\"Foo\\"
   );
 };
@@ -1077,12 +1105,12 @@ const Foo = (color) => <div className={styles[\\"foo-bar\\"]}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo(color) {
   return React.createElement(
     \\"div\\",
-    { style: reactNativeDynamicStyleProcessor.process(styles)[\\"foo-bar\\"] },
+    { style: _reactNativeDynamicStyleProcessor.process(styles)[\\"foo-bar\\"] },
     \\"Foo\\"
   );
 };
@@ -1133,12 +1161,12 @@ const Foo = () => <div className={isTrue ? styles[\\"foo\\"] : styles[\\"bar\\"]
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: isTrue ? reactNativeDynamicStyleProcessor.process(styles)[\\"foo\\"] : reactNativeDynamicStyleProcessor.process(styles)[\\"bar\\"] },
+    { style: isTrue ? _reactNativeDynamicStyleProcessor.process(styles)[\\"foo\\"] : _reactNativeDynamicStyleProcessor.process(styles)[\\"bar\\"] },
     \\"Foo\\"
   );
 };
@@ -1153,12 +1181,12 @@ const Foo = () => <div className={isTrue ? styles.foo : styles.bar} style={{ col
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [isTrue ? reactNativeDynamicStyleProcessor.process(styles).foo : reactNativeDynamicStyleProcessor.process(styles).bar, { color: \\"#f00\\" }] },
+    { style: [isTrue ? _reactNativeDynamicStyleProcessor.process(styles).foo : _reactNativeDynamicStyleProcessor.process(styles).bar, { color: \\"#f00\\" }] },
     \\"Foo\\"
   );
 };
@@ -1173,12 +1201,12 @@ const Foo = () => <div className={isTrue ? styles[\\"foo\\"] : styles[\\"bar\\"]
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [isTrue ? reactNativeDynamicStyleProcessor.process(styles)[\\"foo\\"] : reactNativeDynamicStyleProcessor.process(styles)[\\"bar\\"], { color: \\"#f00\\" }] },
+    { style: [isTrue ? _reactNativeDynamicStyleProcessor.process(styles)[\\"foo\\"] : _reactNativeDynamicStyleProcessor.process(styles)[\\"bar\\"], { color: \\"#f00\\" }] },
     \\"Foo\\"
   );
 };
@@ -1193,12 +1221,12 @@ const Foo = () => <div className={!styles.foo ? styles.foo : styles.bar} style={
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [!reactNativeDynamicStyleProcessor.process(styles).foo ? reactNativeDynamicStyleProcessor.process(styles).foo : reactNativeDynamicStyleProcessor.process(styles).bar, { color: \\"#f00\\" }] },
+    { style: [!_reactNativeDynamicStyleProcessor.process(styles).foo ? _reactNativeDynamicStyleProcessor.process(styles).foo : _reactNativeDynamicStyleProcessor.process(styles).bar, { color: \\"#f00\\" }] },
     \\"Foo\\"
   );
 };
@@ -1213,12 +1241,12 @@ const Foo = () => <div className={styles.foo !== undefined ? styles.foo : styles
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [reactNativeDynamicStyleProcessor.process(styles).foo !== undefined ? reactNativeDynamicStyleProcessor.process(styles).foo : reactNativeDynamicStyleProcessor.process(styles).bar, { color: \\"#f00\\" }] },
+    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo !== undefined ? _reactNativeDynamicStyleProcessor.process(styles).foo : _reactNativeDynamicStyleProcessor.process(styles).bar, { color: \\"#f00\\" }] },
     \\"Foo\\"
   );
 };
@@ -1233,12 +1261,12 @@ const Foo = () => <div className={undefined !== styles.foo ? styles.foo : styles
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [undefined !== reactNativeDynamicStyleProcessor.process(styles).foo ? reactNativeDynamicStyleProcessor.process(styles).foo : reactNativeDynamicStyleProcessor.process(styles).bar, { color: \\"#f00\\" }] },
+    { style: [undefined !== _reactNativeDynamicStyleProcessor.process(styles).foo ? _reactNativeDynamicStyleProcessor.process(styles).foo : _reactNativeDynamicStyleProcessor.process(styles).bar, { color: \\"#f00\\" }] },
     \\"Foo\\"
   );
 };
@@ -1253,12 +1281,12 @@ const Foo = () => <div className={!styles.foo ? styles.foo : styles.bar}>Foo</di
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: !reactNativeDynamicStyleProcessor.process(styles).foo ? reactNativeDynamicStyleProcessor.process(styles).foo : reactNativeDynamicStyleProcessor.process(styles).bar },
+    { style: !_reactNativeDynamicStyleProcessor.process(styles).foo ? _reactNativeDynamicStyleProcessor.process(styles).foo : _reactNativeDynamicStyleProcessor.process(styles).bar },
     \\"Foo\\"
   );
 };
@@ -1273,12 +1301,12 @@ const Foo = () => <div className={styles.foo !== undefined ? styles.foo : styles
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: reactNativeDynamicStyleProcessor.process(styles).foo !== undefined ? reactNativeDynamicStyleProcessor.process(styles).foo : reactNativeDynamicStyleProcessor.process(styles).bar },
+    { style: _reactNativeDynamicStyleProcessor.process(styles).foo !== undefined ? _reactNativeDynamicStyleProcessor.process(styles).foo : _reactNativeDynamicStyleProcessor.process(styles).bar },
     \\"Foo\\"
   );
 };
@@ -1293,12 +1321,12 @@ const Foo = () => <div className={undefined !== styles.foo ? styles.foo : styles
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: undefined !== reactNativeDynamicStyleProcessor.process(styles).foo ? reactNativeDynamicStyleProcessor.process(styles).foo : reactNativeDynamicStyleProcessor.process(styles).bar },
+    { style: undefined !== _reactNativeDynamicStyleProcessor.process(styles).foo ? _reactNativeDynamicStyleProcessor.process(styles).foo : _reactNativeDynamicStyleProcessor.process(styles).bar },
     \\"Foo\\"
   );
 };
@@ -1313,12 +1341,12 @@ const Foo = () => <div className={isTrue ? styles.foo : styles.bar}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: isTrue ? reactNativeDynamicStyleProcessor.process(styles).foo : reactNativeDynamicStyleProcessor.process(styles).bar },
+    { style: isTrue ? _reactNativeDynamicStyleProcessor.process(styles).foo : _reactNativeDynamicStyleProcessor.process(styles).bar },
     \\"Foo\\"
   );
 };
@@ -1333,7 +1361,7 @@ const Foo = () => <div style={{ width: '100%' }}><div className={\`\${styles.foo
 
 'use strict';
 
-var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
 
 var Foo = function Foo() {
   return React.createElement(
@@ -1341,13 +1369,13 @@ var Foo = function Foo() {
     { style: { width: '100%' } },
     React.createElement(
       'div',
-      { style: [reactNativeDynamicStyleProcessor.process(styles).foo1, reactNativeDynamicStyleProcessor.process(styles).bar1] },
+      { style: [_reactNativeDynamicStyleProcessor.process(styles).foo1, _reactNativeDynamicStyleProcessor.process(styles).bar1] },
       React.createElement(
         'div',
-        { style: [reactNativeDynamicStyleProcessor.process(styles).foo2, reactNativeDynamicStyleProcessor.process(styles).bar2, { color: 'red' }] },
+        { style: [_reactNativeDynamicStyleProcessor.process(styles).foo2, _reactNativeDynamicStyleProcessor.process(styles).bar2, { color: 'red' }] },
         React.createElement(
           'div',
-          { style: [reactNativeDynamicStyleProcessor.process(styles).foo3, reactNativeDynamicStyleProcessor.process(styles).bar3] },
+          { style: [_reactNativeDynamicStyleProcessor.process(styles).foo3, _reactNativeDynamicStyleProcessor.process(styles).bar3] },
           'Bar'
         )
       )
@@ -1365,7 +1393,7 @@ const Foo = () => <div style={{ width: \\"100%\\" }}><div className={styles.imWi
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
@@ -1373,7 +1401,7 @@ var Foo = function Foo() {
     { style: { width: \\"100%\\" } },
     React.createElement(
       \\"div\\",
-      { style: reactNativeDynamicStyleProcessor.process(styles).imWithFoo },
+      { style: _reactNativeDynamicStyleProcessor.process(styles).imWithFoo },
       \\"Foo\\"
     )
   );
@@ -1389,7 +1417,7 @@ const Foo = () => <div><div className={styles.foo}>Foo</div><div className={styl
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
@@ -1397,12 +1425,12 @@ var Foo = function Foo() {
     null,
     React.createElement(
       \\"div\\",
-      { style: reactNativeDynamicStyleProcessor.process(styles).foo },
+      { style: _reactNativeDynamicStyleProcessor.process(styles).foo },
       \\"Foo\\"
     ),
     React.createElement(
       \\"div\\",
-      { style: reactNativeDynamicStyleProcessor.process(styles).bar },
+      { style: _reactNativeDynamicStyleProcessor.process(styles).bar },
       \\"Bar\\"
     )
   );
@@ -1418,7 +1446,7 @@ const Foo = () => <div style={{ width: \\"100%\\" }}><div className={styles.styl
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
@@ -1426,13 +1454,13 @@ var Foo = function Foo() {
     { style: { width: \\"100%\\" } },
     React.createElement(
       \\"div\\",
-      { style: reactNativeDynamicStyleProcessor.process(styles).style1 },
+      { style: _reactNativeDynamicStyleProcessor.process(styles).style1 },
       React.createElement(
         \\"div\\",
-        { style: [reactNativeDynamicStyleProcessor.process(styles).style2, { color: \\"red\\" }] },
+        { style: [_reactNativeDynamicStyleProcessor.process(styles).style2, { color: \\"red\\" }] },
         React.createElement(
           \\"div\\",
-          { style: reactNativeDynamicStyleProcessor.process(styles).style3 },
+          { style: _reactNativeDynamicStyleProcessor.process(styles).style3 },
           \\"Bar\\"
         )
       )
@@ -1450,12 +1478,12 @@ const Foo = () => <div className={styles.foo}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: reactNativeDynamicStyleProcessor.process(styles).foo },
+    { style: _reactNativeDynamicStyleProcessor.process(styles).foo },
     \\"Foo\\"
   );
 };
@@ -1470,12 +1498,12 @@ const Foo = () => <div className={f(styles.foo)} style={{ color: \\"#f00\\" }}>F
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [f(reactNativeDynamicStyleProcessor.process(styles).foo), { color: \\"#f00\\" }] },
+    { style: [f(_reactNativeDynamicStyleProcessor.process(styles).foo), { color: \\"#f00\\" }] },
     \\"Foo\\"
   );
 };
@@ -1490,12 +1518,12 @@ const Foo = () => <div className={f(styles.foo)}>Foo</div>
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: f(reactNativeDynamicStyleProcessor.process(styles).foo) },
+    { style: f(_reactNativeDynamicStyleProcessor.process(styles).foo) },
     \\"Foo\\"
   );
 };
@@ -1528,12 +1556,12 @@ const Foo = () => <div className={isTrue ? f(styles.foo) : f(styles.bar)} style=
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: [isTrue ? f(reactNativeDynamicStyleProcessor.process(styles).foo) : f(reactNativeDynamicStyleProcessor.process(styles).bar), { color: \\"#f00\\" }] },
+    { style: [isTrue ? f(_reactNativeDynamicStyleProcessor.process(styles).foo) : f(_reactNativeDynamicStyleProcessor.process(styles).bar), { color: \\"#f00\\" }] },
     \\"Foo\\"
   );
 };
@@ -1548,12 +1576,12 @@ const Foo = () => <div className={isTrue ? f(styles.foo) : f(styles.bar)}>Foo</d
 
 \\"use strict\\";
 
-var reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
 
 var Foo = function Foo() {
   return React.createElement(
     \\"div\\",
-    { style: isTrue ? f(reactNativeDynamicStyleProcessor.process(styles).foo) : f(reactNativeDynamicStyleProcessor.process(styles).bar) },
+    { style: isTrue ? f(_reactNativeDynamicStyleProcessor.process(styles).foo) : f(_reactNativeDynamicStyleProcessor.process(styles).bar) },
     \\"Foo\\"
   );
 };
