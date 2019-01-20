@@ -49,11 +49,9 @@ Example:
 ↓ ↓ ↓ ↓ ↓ ↓
 
 ```jsx
-<Text
-  style={
-    require("react-native-dynamic-style-processor").process(styles).myClass
-  }
-/>
+var _reactNativeDynamicStyleProcessor = require("react-native-dynamic-style-processor");
+
+<Text style={_reactNativeDynamicStyleProcessor.process(styles).myClass} />;
 ```
 
 ---
@@ -67,12 +65,14 @@ Example:
 ↓ ↓ ↓ ↓ ↓ ↓
 
 ```jsx
+var _reactNativeDynamicStyleProcessor = require("react-native-dynamic-style-processor");
+
 <Text
   style={[
-    require("react-native-dynamic-style-processor").process(styles).myClass,
+    _reactNativeDynamicStyleProcessor.process(styles).myClass,
     { color: "blue" }
   ]}
-/>
+/>;
 ```
 
 ## Multiple classes
@@ -88,12 +88,14 @@ Example:
 ↓ ↓ ↓ ↓ ↓ ↓
 
 ```jsx
+var _reactNativeDynamicStyleProcessor = require("react-native-dynamic-style-processor");
+
 <Text
   style={[
-    require("react-native-dynamic-style-processor").process(styles).class1,
-    require("react-native-dynamic-style-processor").process(styles).class2
+    _reactNativeDynamicStyleProcessor.process(styles).class1,
+    _reactNativeDynamicStyleProcessor.process(styles).class2
   ]}
-/>
+/>;
 ```
 
 ---
@@ -110,13 +112,15 @@ Example:
 ↓ ↓ ↓ ↓ ↓ ↓
 
 ```jsx
+var _reactNativeDynamicStyleProcessor = require("react-native-dynamic-style-processor");
+
 <Text
   style={[
-    require("react-native-dynamic-style-processor").process(styles).class1,
-    require("react-native-dynamic-style-processor").process(styles).class2,
+    _reactNativeDynamicStyleProcessor.process(styles).class1,
+    _reactNativeDynamicStyleProcessor.process(styles).class2,
     { color: "blue" }
   ]}
-/>
+/>;
 ```
 
 #### Using template literal syntax
@@ -130,12 +134,14 @@ Example:
 ↓ ↓ ↓ ↓ ↓ ↓
 
 ```jsx
+var _reactNativeDynamicStyleProcessor = require("react-native-dynamic-style-processor");
+
 <Text
   style={[
-    require("react-native-dynamic-style-processor").process(styles).class1,
-    require("react-native-dynamic-style-processor").process(styles).class2
+    _reactNativeDynamicStyleProcessor.process(styles).class1,
+    _reactNativeDynamicStyleProcessor.process(styles).class2
   ]}
-/>
+/>;
 ```
 
 ---
@@ -152,13 +158,15 @@ Example:
 ↓ ↓ ↓ ↓ ↓ ↓
 
 ```jsx
+var _reactNativeDynamicStyleProcessor = require("react-native-dynamic-style-processor");
+
 <Text
   style={[
-    require("react-native-dynamic-style-processor").process(styles).class1,
-    require("react-native-dynamic-style-processor").process(styles).class2,
+    _reactNativeDynamicStyleProcessor.process(styles).class1,
+    _reactNativeDynamicStyleProcessor.process(styles).class2,
     { color: "blue" }
   ]}
-/>
+/>;
 ```
 
 ## Using ternary operator
@@ -172,11 +180,13 @@ Example:
 ↓ ↓ ↓ ↓ ↓ ↓
 
 ```jsx
+var _reactNativeDynamicStyleProcessor = require("react-native-dynamic-style-processor");
+
 <Text
   style={
     isTrue
-      ? require("react-native-dynamic-style-processor").process(styles).class1
-      : require("react-native-dynamic-style-processor").process(styles).class2
+      ? _reactNativeDynamicStyleProcessor.process(styles).class1
+      : _reactNativeDynamicStyleProcessor.process(styles).class2
   }
-/>
+/>;
 ```
