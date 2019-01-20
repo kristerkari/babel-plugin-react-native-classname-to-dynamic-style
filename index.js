@@ -4,6 +4,17 @@ module.exports = function(babel) {
   var t = babel.types;
   var templateLiteral = null;
 
+  function isRequire(node) {
+    return (
+      node &&
+      node.declarations &&
+      node.declarations[0] &&
+      node.declarations[0].init &&
+      node.declarations[0].init.callee &&
+      node.declarations[0].init.callee.name === "require"
+    );
+  }
+
   function isJoinExpression(value) {
     return (
       value.expression.callee &&
@@ -32,26 +43,33 @@ module.exports = function(babel) {
     return t.isJSXExpressionContainer(value) && isJoinExpression(value);
   }
 
-  function generateRequire(expression) {
+  function generateRequire(name) {
     var require = t.callExpression(t.identifier("require"), [
       t.stringLiteral("react-native-dynamic-style-processor")
     ]);
+    var d = t.variableDeclarator(name, require);
+    return t.variableDeclaration("var", [d]);
+  }
 
+  function generateProcessCall(expression, state) {
+    state.hasTransformedClassName = true;
     expression.object = t.callExpression(
-      t.memberExpression(require, t.identifier("process")),
+      t.memberExpression(state.reqName, t.identifier("process")),
       [expression.object]
     );
     return expression;
   }
 
-  function transformExpressions(expression) {
+  function transformExpressions(expression, state) {
     if (t.isMemberExpression(expression)) {
-      expression = generateRequire(expression);
+      expression = generateProcessCall(expression, state);
     }
 
     if (t.isCallExpression(expression)) {
       if (expression.arguments.some(t.isMemberExpression)) {
-        expression.arguments = expression.arguments.map(generateRequire);
+        expression.arguments = expression.arguments.map(a =>
+          generateProcessCall(a, state)
+        );
       }
     }
 
@@ -62,36 +80,36 @@ module.exports = function(babel) {
 
       if (t.isUnaryExpression(test)) {
         if (t.isMemberExpression(test.argument)) {
-          expression.test.argument = generateRequire(test.argument);
+          expression.test.argument = generateProcessCall(test.argument, state);
         }
       }
 
       if (t.isBinaryExpression(test)) {
         if (t.isMemberExpression(test.left)) {
-          expression.test.left = generateRequire(test.left);
+          expression.test.left = generateProcessCall(test.left, state);
         }
         if (t.isMemberExpression(test.right)) {
-          expression.test.right = generateRequire(test.right);
+          expression.test.right = generateProcessCall(test.right, state);
         }
       }
 
       if (t.isMemberExpression(consequent)) {
-        expression.consequent = generateRequire(consequent);
+        expression.consequent = generateProcessCall(consequent, state);
       }
       if (t.isCallExpression(consequent)) {
         if (consequent.arguments.some(t.isMemberExpression)) {
-          expression.consequent.arguments = consequent.arguments.map(
-            generateRequire
+          expression.consequent.arguments = consequent.arguments.map(a =>
+            generateProcessCall(a, state)
           );
         }
       }
       if (t.isMemberExpression(alternate)) {
-        expression.alternate = generateRequire(alternate);
+        expression.alternate = generateProcessCall(alternate, state);
       }
       if (t.isCallExpression(alternate)) {
         if (alternate.arguments.some(t.isMemberExpression)) {
-          expression.alternate.arguments = alternate.arguments.map(
-            generateRequire
+          expression.alternate.arguments = alternate.arguments.map(a =>
+            generateProcessCall(a, state)
           );
         }
       }
@@ -102,6 +120,29 @@ module.exports = function(babel) {
   return {
     name: "react-native-classname-to-dynamic-style",
     visitor: {
+      Program: {
+        enter(path, state) {
+          state.reqName = path.scope.generateUidIdentifier(
+            "react-native-dynamic-style-processor"
+          );
+        },
+        exit(path, state) {
+          if (!state.hasTransformedClassName) {
+            return;
+          }
+
+          const lastImportOrRequire = path
+            .get("body")
+            .filter(p => p.isImportDeclaration() || isRequire(p.node))
+            .pop();
+
+          if (lastImportOrRequire) {
+            lastImportOrRequire.insertAfter(generateRequire(state.reqName));
+          } else {
+            path.unshiftContainer("body", generateRequire(state.reqName));
+          }
+        }
+      },
       JSXOpeningElement: {
         exit(path, state) {
           if (
@@ -120,7 +161,7 @@ module.exports = function(babel) {
             if (css && style) {
               style.node.value = t.arrayExpression(
                 [].concat(
-                  elements.map(generateRequire),
+                  elements.map(e => generateProcessCall(e, state)),
                   style.node.value.expression
                 )
               );
@@ -130,21 +171,19 @@ module.exports = function(babel) {
               style = css;
               style.node.name.name = "style";
               style.node.value = t.arrayExpression(
-                elements.map(generateRequire)
+                elements.map(e => generateProcessCall(e, state))
               );
             }
           } else if (isSameElement || style === null) {
             css.node.value.expression = transformExpressions(
-              css.node.value.expression
+              css.node.value.expression,
+              state
             );
             style = css;
             style.node.name.name = "style";
           } else if (css && style && templateLiteral === null) {
-            css.node.value.expression = transformExpressions(
-              css.node.value.expression
-            );
             style.node.value = t.arrayExpression([
-              css.node.value.expression,
+              transformExpressions(css.node.value.expression, state),
               style.node.value.expression
             ]);
             css.remove();
@@ -180,8 +219,8 @@ module.exports = function(babel) {
           style = null;
         } else if (isTemplateLiteralWithExpressions(css.node.value)) {
           var expressions = css.node.value.expression.expressions;
-          css.node.value.expression.expressions = expressions.map(
-            generateRequire
+          css.node.value.expression.expressions = expressions.map(e =>
+            generateProcessCall(e, state)
           );
           templateLiteral = css.node.value;
           css.node.value = t.arrayExpression(

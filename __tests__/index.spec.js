@@ -32,6 +32,15 @@ pluginTester({
     },
     {
       title:
+        "Should not clash with already existing require call with the same name",
+      code: `
+        var reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+        var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+        const Foo = () => <div className={styles.foo}>Foo</div>
+      `
+    },
+    {
+      title:
         "Should transform single classname to styles object but not touch parent element's style",
       code: `const Foo = () => <div style={{ width: "100%" }}><div className={styles.imWithFoo}>Foo</div></div>`
     },
