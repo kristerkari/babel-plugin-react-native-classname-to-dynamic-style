@@ -7,7 +7,7 @@
 [![Downloads per month](https://img.shields.io/npm/dm/babel-plugin-react-native-classname-to-dynamic-style.svg)](http://npmcharts.com/compare/babel-plugin-react-native-classname-to-dynamic-style?periodLength=30)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
 
-Transform JSX `className` property to a `style` property that gets calculated at runtime in React Native. The plugin is used to match style objects containing parsed CSS media queries and CSS viewport units with React Native.
+Transform JSX `className` property to a `style` property that calculates styles at runtime in React Native. The plugin is used to match style objects containing parsed CSS media queries and CSS viewport units with React Native.
 
 ## Usage
 
