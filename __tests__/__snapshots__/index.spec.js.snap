@@ -723,23 +723,23 @@ exports[`babel-plugin-react-native-classname-to-dynamic-style Should support mul
 "
 const 
   rd = Math.random(10),
-  style1 = styles.bar,
-  style2 = rd % 2 === 1 ? styles.bay : styles.baz,
+  style1 = _reactNativeDynamicStyleProcessor.process(styles).bar,
+  style2 = rd % 2 === 1 ? _reactNativeDynamicStyleProcessor.process(styles).bay : _reactNativeDynamicStyleProcessor.process(styles).baz,
   Foo = () => <div className={[styles.foo, style1, style2].join(' ')}>Bar</div>
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 'use strict';
 
-var _reactNativeDynamicStyleProcessor = require('react-native-dynamic-style-processor');
+var _reactNativeDynamicStyleProcessor2 = require('react-native-dynamic-style-processor');
 
 var rd = Math.random(10),
-    style1 = styles.bar,
-    style2 = rd % 2 === 1 ? styles.bay : styles.baz,
+    style1 = _reactNativeDynamicStyleProcessor.process(styles).bar,
+    style2 = rd % 2 === 1 ? _reactNativeDynamicStyleProcessor.process(styles).bay : _reactNativeDynamicStyleProcessor.process(styles).baz,
     Foo = function Foo() {
   return React.createElement(
     'div',
-    { style: [_reactNativeDynamicStyleProcessor.process(styles).foo, style1, style2] },
+    { style: [_reactNativeDynamicStyleProcessor2.process(styles).foo, style1, style2] },
     'Bar'
   );
 };

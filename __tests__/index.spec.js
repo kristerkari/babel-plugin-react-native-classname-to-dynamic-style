@@ -399,8 +399,8 @@ pluginTester({
       code: `
         const 
           rd = Math.random(10),
-          style1 = styles.bar,
-          style2 = rd % 2 === 1 ? styles.bay : styles.baz,
+          style1 = _reactNativeDynamicStyleProcessor.process(styles).bar,
+          style2 = rd % 2 === 1 ? _reactNativeDynamicStyleProcessor.process(styles).bay : _reactNativeDynamicStyleProcessor.process(styles).baz,
           Foo = () => <div className={[styles.foo, style1, style2].join(' ')}>Bar</div>
       `
     }
