@@ -721,26 +721,37 @@ var Foo = function Foo() {
 
 exports[`babel-plugin-react-native-classname-to-dynamic-style Should support multiple classnames type in array styles objects: Should support multiple classnames type in array styles objects 1`] = `
 "
-const 
-  rd = Math.random(10),
-  style1 = _reactNativeDynamicStyleProcessor.process(styles).bar,
-  style2 = rd % 2 === 1 ? _reactNativeDynamicStyleProcessor.process(styles).bay : _reactNativeDynamicStyleProcessor.process(styles).baz,
-  Foo = () => <div className={[styles.foo, style1, style2].join(' ')}>Bar</div>
+import styles from \\"./styles.css\\";
+const Foo = () => {
+  const
+    rd = Math.random(10),
+    style1 = styles.bar,
+    style2 = rd % 2 === 1 ? styles.bay : styles.baz;
+  
+  return <div className={[styles.foo, style1, style2].join(' ')}>Bar</div>
+}
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-'use strict';
+\\"use strict\\";
 
-var _reactNativeDynamicStyleProcessor2 = require('react-native-dynamic-style-processor');
+var _styles = require(\\"./styles.css\\");
 
-var rd = Math.random(10),
-    style1 = _reactNativeDynamicStyleProcessor.process(styles).bar,
-    style2 = rd % 2 === 1 ? _reactNativeDynamicStyleProcessor.process(styles).bay : _reactNativeDynamicStyleProcessor.process(styles).baz,
-    Foo = function Foo() {
+var _styles2 = _interopRequireDefault(_styles);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _reactNativeDynamicStyleProcessor = require(\\"react-native-dynamic-style-processor\\");
+
+var Foo = function Foo() {
+  var rd = Math.random(10),
+      style1 = _styles2.default.bar,
+      style2 = rd % 2 === 1 ? _styles2.default.bay : _styles2.default.baz;
+
   return React.createElement(
-    'div',
-    { style: [_reactNativeDynamicStyleProcessor2.process(styles).foo, style1, style2] },
-    'Bar'
+    \\"div\\",
+    { style: [_reactNativeDynamicStyleProcessor.process(_styles2.default).foo, style1, style2] },
+    \\"Bar\\"
   );
 };
 "

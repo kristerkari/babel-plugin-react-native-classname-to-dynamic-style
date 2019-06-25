@@ -397,11 +397,15 @@ pluginTester({
       title:
         "Should support multiple classnames type in array styles objects",
       code: `
-        const 
-          rd = Math.random(10),
-          style1 = _reactNativeDynamicStyleProcessor.process(styles).bar,
-          style2 = rd % 2 === 1 ? _reactNativeDynamicStyleProcessor.process(styles).bay : _reactNativeDynamicStyleProcessor.process(styles).baz,
-          Foo = () => <div className={[styles.foo, style1, style2].join(' ')}>Bar</div>
+          import styles from "./styles.css";
+          const Foo = () => {
+            const
+              rd = Math.random(10),
+              style1 = styles.bar,
+              style2 = rd % 2 === 1 ? styles.bay : styles.baz;
+            
+            return <div className={[styles.foo, style1, style2].join(' ')}>Bar</div>
+          }
       `
     }
   ]
