@@ -157,11 +157,11 @@ module.exports = function(babel) {
             css && style && css.parentPath.node !== style.parentPath.node;
 
           if (isArrayWithJoin(css.node.value)) {
-            var elements = css.node.value.expression.callee.object.elements.filter(function(v) { return !!v.object; });
+            var elements = css.node.value.expression.callee.object.elements;
             if (css && style) {
               style.node.value = t.arrayExpression(
                 [].concat(
-                  elements.map(e => generateProcessCall(e, state)),
+                  elements.map(e => transformExpressions(e, state)),
                   style.node.value.expression
                 )
               );
@@ -171,7 +171,7 @@ module.exports = function(babel) {
               style = css;
               style.node.name.name = "style";
               style.node.value = t.arrayExpression(
-                elements.map(e => generateProcessCall(e, state))
+                elements.map(e => transformExpressions(e, state))
               );
             }
           } else if (isSameElement || style === null) {
