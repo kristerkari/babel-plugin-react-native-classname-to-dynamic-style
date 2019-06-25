@@ -157,7 +157,7 @@ module.exports = function(babel) {
             css && style && css.parentPath.node !== style.parentPath.node;
 
           if (isArrayWithJoin(css.node.value)) {
-            var elements = css.node.value.expression.callee.object.elements;
+            var elements = css.node.value.expression.callee.object.elements.filter(function(v) {return !!v.object});
             if (css && style) {
               style.node.value = t.arrayExpression(
                 [].concat(
