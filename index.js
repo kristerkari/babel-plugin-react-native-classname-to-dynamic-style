@@ -161,7 +161,7 @@ module.exports = function(babel) {
             if (css && style) {
               style.node.value = t.arrayExpression(
                 [].concat(
-                  elements.map(e => generateProcessCall(e, state)),
+                  elements.map(e => transformExpressions(e, state)),
                   style.node.value.expression
                 )
               );
@@ -171,7 +171,7 @@ module.exports = function(babel) {
               style = css;
               style.node.name.name = "style";
               style.node.value = t.arrayExpression(
-                elements.map(e => generateProcessCall(e, state))
+                elements.map(e => transformExpressions(e, state))
               );
             }
           } else if (isSameElement || style === null) {
